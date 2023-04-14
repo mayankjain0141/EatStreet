@@ -19,5 +19,5 @@ public class OrderItem {
     @NotNull
     private final BigDecimal price;
     @NotNull
-    private final BigDecimal total;
+    private final BigDecimal subTotal;
 }
