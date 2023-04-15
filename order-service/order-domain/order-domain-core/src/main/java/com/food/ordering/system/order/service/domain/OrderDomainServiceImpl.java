@@ -1,5 +1,6 @@
 package com.food.ordering.system.order.service.domain;
 
+import com.food.ordering.system.domain.valueobject.ProductId;
 import com.food.ordering.system.order.service.domain.entity.Order;
 import com.food.ordering.system.order.service.domain.entity.OrderItem;
 import com.food.ordering.system.order.service.domain.entity.Product;
@@ -20,6 +21,7 @@ import java.util.Map;
 public class OrderDomainServiceImpl implements OrderDomainService {
 
     private static final String UTC = "UTC";
+
     @Override
     public OrderCreatedEvent validateAndInitiateOrder(Order order, Restaurant restaurant) {
         validateRestaurant(restaurant);
@@ -64,24 +66,15 @@ public class OrderDomainServiceImpl implements OrderDomainService {
     }
 
     private void setOrderProductInformation(Order order, Restaurant restaurant) {
-        // Create a map of product names to product objects for the restaurant
-        Map<String, Product> productMap = new HashMap<>();
-
-        for (Product product : restaurant.getProducts()) {
-            productMap.put(product.getName(), product);
-        }
-
-        // Update the products with the confirmed name and price for each order item
-        for (OrderItem orderItem : order.getItems()) {
+        Map<ProductId, Product> restaurantProductMap = new HashMap<>();
+        restaurant.getProducts().forEach(restaurantProduct -> {
+            restaurantProductMap.put(restaurantProduct.getId(), restaurantProduct);
+        });
+        order.getItems().forEach(orderItem -> {
             Product currentProduct = orderItem.getProduct();
-            Product restaurantProduct = productMap.get(currentProduct.getName());
-
-            if (restaurantProduct != null) {
-                currentProduct.updateWithConfirmedNameAndPrice(
-                        restaurantProduct.getName(),
-                        restaurantProduct.getPrice()
-                );
-            }
-        }
+            Product restaurantProduct = restaurantProductMap.get(currentProduct.getId());
+            currentProduct.updateWithConfirmedNameAndPrice(restaurantProduct.getName(),
+                    restaurantProduct.getPrice());
+        });
     }
 }
