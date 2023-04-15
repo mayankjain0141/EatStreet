@@ -36,21 +36,27 @@ public class OrderApplicationServiceTest {
 
     @Autowired
     private OrderApplicationService orderApplicationService;
+
     @Autowired
     private OrderDataMapper orderDataMapper;
+
     @Autowired
     private OrderRepository orderRepository;
-    @Autowired
-    private RestaurantRepository restaurantRepository;
+
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private RestaurantRepository restaurantRepository;
+
     private CreateOrderCommand createOrderCommand;
     private CreateOrderCommand createOrderCommandWrongPrice;
     private CreateOrderCommand createOrderCommandWrongProductPrice;
-    private final UUID CUSTOMER_ID = UUID.fromString("a9958745-acb8-4f1f-9fed-fd7994c62a78");
-    private final UUID RESTAURANT_ID = UUID.fromString("e21d3e1b-c591-4748-8a8b-aa0b169a4dce");
-    private final UUID PRODUCT_ID = UUID.fromString("0866812a-4ee2-44c1-89d3-f24837762b7f");
-    private final UUID ORDER_ID = UUID.fromString("87ebc978-6a81-4069-b409-4227b40e21b5");
+    private final UUID CUSTOMER_ID = UUID.fromString("d215b5f8-0249-4dc5-89a3-51fd148cfb41");
+    private final UUID RESTAURANT_ID = UUID.fromString("d215b5f8-0249-4dc5-89a3-51fd148cfb45");
+    private final UUID PRODUCT_ID = UUID.fromString("d215b5f8-0249-4dc5-89a3-51fd148cfb48");
+    private final UUID ORDER_ID = UUID.fromString("15a497c1-0f4b-4eff-b9f4-c402c8c07afb");
+    private final UUID SAGA_ID = UUID.fromString("15a497c1-0f4b-4eff-b9f4-c402c8c07afa");
     private final BigDecimal PRICE = new BigDecimal("200.00");
 
     @BeforeAll
@@ -127,16 +133,12 @@ public class OrderApplicationServiceTest {
         Customer customer = new Customer();
         customer.setId(new CustomerId(CUSTOMER_ID));
 
-        Restaurant restaurantResponse = Restaurant.Builder
-                .builder()
+        Restaurant restaurantResponse = Restaurant.Builder.builder()
                 .restaurantId(new RestaurantId(createOrderCommand.getRestaurantId()))
-                .products(List.of(new Product(new ProductId(PRODUCT_ID), "product-1",
-                                new Money(new BigDecimal("50.00"))),
-                        new Product(new ProductId(PRODUCT_ID), "product-2",
-                                new Money(new BigDecimal("50.00")))))
+                .products(List.of(new Product(new ProductId(PRODUCT_ID), "product-1", new Money(new BigDecimal("50.00"))),
+                        new Product(new ProductId(PRODUCT_ID), "product-2", new Money(new BigDecimal("50.00")))))
                 .active(true)
                 .build();
-
 
         Order order = orderDataMapper.createOrderCommandToOrder(createOrderCommand);
         order.setId(new OrderId(ORDER_ID));
@@ -157,31 +159,31 @@ public class OrderApplicationServiceTest {
 
     @Test
     public void testCreateOrderWithWrongTotalPrice() {
-        assertThrows(OrderDomainException.class,
+        OrderDomainException orderDomainException = assertThrows(OrderDomainException.class,
                 () -> orderApplicationService.createOrder(createOrderCommandWrongPrice));
+        assertEquals("Total price: 250.00 is not equal to Order items total: 200.00!", orderDomainException.getMessage());
     }
 
     @Test
     public void testCreateOrderWithWrongProductPrice() {
-        assertThrows(OrderDomainException.class,
+        OrderDomainException orderDomainException = assertThrows(OrderDomainException.class,
                 () -> orderApplicationService.createOrder(createOrderCommandWrongProductPrice));
+        assertEquals("Order item price: 60.00 is not valid for product " + PRODUCT_ID, orderDomainException.getMessage());
     }
 
     @Test
     public void testCreateOrderWithPassiveRestaurant() {
-        Restaurant restaurantResponse = Restaurant.Builder
-                .builder()
+        Restaurant restaurantResponse = Restaurant.Builder.builder()
                 .restaurantId(new RestaurantId(createOrderCommand.getRestaurantId()))
-                .products(List.of(new Product(new ProductId(PRODUCT_ID), "product-1",
-                                new Money(new BigDecimal("50.00"))),
-                        new Product(new ProductId(PRODUCT_ID), "product-2",
-                                new Money(new BigDecimal("50.00")))))
+                .products(List.of(new Product(new ProductId(PRODUCT_ID), "product-1", new Money(new BigDecimal("50.00"))),
+                        new Product(new ProductId(PRODUCT_ID), "product-2", new Money(new BigDecimal("50.00")))))
                 .active(false)
                 .build();
         when(restaurantRepository.findRestaurantInformation(orderDataMapper.createOrderCommandToRestaurant(createOrderCommand)))
                 .thenReturn(Optional.of(restaurantResponse));
-        assertThrows(OrderDomainException.class,
+        OrderDomainException orderDomainException = assertThrows(OrderDomainException.class,
                 () -> orderApplicationService.createOrder(createOrderCommand));
+        assertEquals("Restaurant with id " + RESTAURANT_ID + " is currently not active!", orderDomainException.getMessage());
     }
 
 }
