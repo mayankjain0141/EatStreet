@@ -15,17 +15,17 @@ import org.springframework.context.annotation.Bean;
 public class OrderTestConfiguration {
 
     @Bean
-    public OrderCreatedPaymentRequestMessagePublisher orderCreatedPaymentRequestMessagePublisher(){
+    public OrderCreatedPaymentRequestMessagePublisher orderCreatedPaymentRequestMessagePublisher() {
         return Mockito.mock(OrderCreatedPaymentRequestMessagePublisher.class);
     }
 
     @Bean
-    public OrderCancelledPaymentRequestMessagePublisher orderCancelledPaymentRequestMessagePublisher(){
+    public OrderCancelledPaymentRequestMessagePublisher orderCancelledPaymentRequestMessagePublisher() {
         return Mockito.mock(OrderCancelledPaymentRequestMessagePublisher.class);
     }
 
     @Bean
-    public OrderPaidRestaurantRequestMessagePublisher orderPaidRestaurantRequestMessagePublisher(){
+    public OrderPaidRestaurantRequestMessagePublisher orderPaidRestaurantRequestMessagePublisher() {
         return Mockito.mock(OrderPaidRestaurantRequestMessagePublisher.class);
     }
 
@@ -35,17 +35,17 @@ public class OrderTestConfiguration {
     }
 
     @Bean
-    public CustomerRepository customerRepository(){
+    public CustomerRepository customerRepository() {
         return Mockito.mock(CustomerRepository.class);
     }
 
     @Bean
-    public RestaurantRepository restaurantRepository(){
+    public RestaurantRepository restaurantRepository() {
         return Mockito.mock(RestaurantRepository.class);
     }
 
     @Bean
-    public OrderDomainService orderDomainService(){
+    public OrderDomainService orderDomainService() {
         return new OrderDomainServiceImpl();
     }
 }

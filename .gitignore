@@ -1,5 +1,49 @@
-.vscode
-docs
-*.class
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
 
+### IntelliJ IDEA ###
+.idea/modules.xml
+.idea/jarRepositories.xml
+.idea/compiler.xml
+.idea/libraries/
+*.iws
+*.iml
+*.ipr
+
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
 .DS_Store
+
+### docker-compose volumes content ###
+**/infrastructure/docker-compose/volumes/kafka/broker-1/**
+**/infrastructure/docker-compose/volumes/kafka/broker-2/**
+**/infrastructure/docker-compose/volumes/kafka/broker-3/**
+
+**/infrastructure/docker-compose/volumes/zookeeper/data/**
+**/infrastructure/docker-compose/volumes/zookeeper/transactions/**
+
+### Docs ###
+docs
