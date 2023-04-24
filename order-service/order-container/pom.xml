@@ -5,17 +5,16 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.food.ordering.system</groupId>
-        <artifactId>food-ordering-system</artifactId>
+        <artifactId>order-service</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
     </parent>
 
     <artifactId>order-container</artifactId>
 
+    <name>order-container</name>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <!--
         THIS GLUE TOGETHER ALL MODULES
         TO CREATE A SINGLE RUNNABLE JAR FILE THAT WILL RUN ORDER MICROSERVICE.
@@ -42,5 +41,4 @@
             <artifactId>order-messaging</artifactId>
         </dependency>
     </dependencies>
-
 </project>
