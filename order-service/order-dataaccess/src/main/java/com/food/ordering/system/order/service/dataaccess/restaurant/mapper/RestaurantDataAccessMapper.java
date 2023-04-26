@@ -26,7 +26,7 @@ public class RestaurantDataAccessMapper {
         RestaurantEntity restaurantEntity =
                 restaurantEntities.stream().findFirst().orElseThrow(() ->
                         new RestaurantDataException("Restaurant could not be found."));
-        List<Product> restaurantProducts = restaurantEntities.stream().map( entity ->
+        List<Product> restaurantProducts = restaurantEntities.stream().map(entity ->
                         new Product(new ProductId(entity.getProductId()), entity.getProductName(), new Money(entity.getProductPrice())))
                 .collect(Collectors.toList());
         return Restaurant.Builder.builder()

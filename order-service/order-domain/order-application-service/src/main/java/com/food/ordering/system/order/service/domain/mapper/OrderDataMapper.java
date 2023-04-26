@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @Component
 public class OrderDataMapper {
 
-    // set only the Id of the product here, rest we'll get from restaurant repository
+    // set only the ID of the product here, rest we'll get from restaurant repository
     public Restaurant createOrderCommandToRestaurant(CreateOrderCommand createOrderCommand) {
         return Restaurant.Builder.builder()
                 .restaurantId(new RestaurantId(createOrderCommand.getRestaurantId()))
