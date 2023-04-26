@@ -9,8 +9,8 @@ import com.food.ordering.system.order.service.messaging.mapper.OrderMessagingDat
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-@Component
 @Slf4j
+@Component
 public class CreateOrderKafkaMessagePublisher implements OrderCreatedPaymentRequestMessagePublisher {
 
     private final OrderMessagingDataMapper orderMessagingDataMapper;
