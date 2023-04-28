@@ -11,11 +11,17 @@
 
     <artifactId>order-domain</artifactId>
     <name>order-domain</name>
+    <packaging>pom</packaging>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <modules>
+        <module>order-application-service</module>
+        <module>order-domain-core</module>
+    </modules>
 
 </project>
