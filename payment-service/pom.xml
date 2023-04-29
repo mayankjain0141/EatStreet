@@ -9,11 +9,13 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>common</artifactId>
+    <artifactId>payment-service</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>common-application</module>
-        <module>common-domain</module>
+        <module>payment-domain</module>
+        <module>payment-dataaccess</module>
+        <module>payment-messaging</module>
+        <module>payment-container</module>
     </modules>
 
     <properties>

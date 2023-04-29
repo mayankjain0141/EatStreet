@@ -22,7 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -70,7 +70,7 @@ public class OrderApplicationServiceTest {
                         .city("Paris")
                         .build())
                 .price(PRICE)
-                .items(List.of(OrderItem.builder()
+                .items(Arrays.asList(OrderItem.builder()
                                 .productId(PRODUCT_ID)
                                 .quantity(1)
                                 .price(new BigDecimal("50.00"))
@@ -93,7 +93,7 @@ public class OrderApplicationServiceTest {
                         .city("Paris")
                         .build())
                 .price(new BigDecimal("250.00"))
-                .items(List.of(OrderItem.builder()
+                .items(Arrays.asList(OrderItem.builder()
                                 .productId(PRODUCT_ID)
                                 .quantity(1)
                                 .price(new BigDecimal("50.00"))
@@ -116,7 +116,7 @@ public class OrderApplicationServiceTest {
                         .city("Paris")
                         .build())
                 .price(new BigDecimal("210.00"))
-                .items(List.of(OrderItem.builder()
+                .items(Arrays.asList(OrderItem.builder()
                                 .productId(PRODUCT_ID)
                                 .quantity(1)
                                 .price(new BigDecimal("60.00"))
@@ -134,7 +134,7 @@ public class OrderApplicationServiceTest {
 
         Restaurant restaurantResponse = Restaurant.Builder.builder()
                 .restaurantId(new RestaurantId(createOrderCommand.getRestaurantId()))
-                .products(List.of(new Product(new ProductId(PRODUCT_ID), "product-1", new Money(new BigDecimal("50.00"))),
+                .products(Arrays.asList(new Product(new ProductId(PRODUCT_ID), "product-1", new Money(new BigDecimal("50.00"))),
                         new Product(new ProductId(PRODUCT_ID), "product-2", new Money(new BigDecimal("50.00")))))
                 .active(true)
                 .build();
@@ -174,7 +174,7 @@ public class OrderApplicationServiceTest {
     public void testCreateOrderWithPassiveRestaurant() {
         Restaurant restaurantResponse = Restaurant.Builder.builder()
                 .restaurantId(new RestaurantId(createOrderCommand.getRestaurantId()))
-                .products(List.of(new Product(new ProductId(PRODUCT_ID), "product-1", new Money(new BigDecimal("50.00"))),
+                .products(Arrays.asList(new Product(new ProductId(PRODUCT_ID), "product-1", new Money(new BigDecimal("50.00"))),
                         new Product(new ProductId(PRODUCT_ID), "product-2", new Money(new BigDecimal("50.00")))))
                 .active(false)
                 .build();
