@@ -8,6 +8,7 @@ target/
 .idea/jarRepositories.xml
 .idea/compiler.xml
 .idea/libraries/
+.idea/
 *.iws
 *.iml
 *.ipr
@@ -46,4 +47,4 @@ build/
 **/infrastructure/docker-compose/volumes/zookeeper/transactions/**
 
 ### Docs ###
-docs
+docs-local

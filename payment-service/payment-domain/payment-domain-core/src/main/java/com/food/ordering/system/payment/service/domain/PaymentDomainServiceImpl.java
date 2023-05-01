@@ -79,6 +79,14 @@ public class PaymentDomainServiceImpl implements PaymentDomainService {
         }
     }
 
+    private void addCreditEntry(Payment payment, CreditEntry creditEntry) {
+        creditEntry.addCreditAmount(payment.getPrice());
+    }
+
+    private void subtractCreditEntry(Payment payment, CreditEntry creditEntry) {
+        creditEntry.subtractCreditAmount(payment.getPrice());
+    }
+
     private void validateCreditEntry(Payment payment, CreditEntry creditEntry, List<String> failureMessages) {
         if (payment.getPrice().isGreaterThan(creditEntry.getTotalCreditAmount())) {
             log.error("Customer with id: {} doesn't have enough credit for payment!",
@@ -86,10 +94,6 @@ public class PaymentDomainServiceImpl implements PaymentDomainService {
             failureMessages.add("Customer with id=" + payment.getCustomerId().getValue()
                     + " doesn't have enough credit for payment!");
         }
-    }
-
-    private void subtractCreditEntry(Payment payment, CreditEntry creditEntry) {
-        creditEntry.subtractCreditAmount(payment.getPrice());
     }
 
     private void updateCreditHistory(Payment payment,
@@ -132,7 +136,4 @@ public class PaymentDomainServiceImpl implements PaymentDomainService {
                 .reduce(Money.ZERO, Money::add);
     }
 
-    private void addCreditEntry(Payment payment, CreditEntry creditEntry) {
-        creditEntry.addCreditAmount(payment.getPrice());
-    }
 }

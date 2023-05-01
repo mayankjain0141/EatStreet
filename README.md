@@ -1,6 +1,6 @@
 # EatStreet
 
-EatStreet is a sophisticated food ordering system developed using the SpringBoot Framework of Java. The system follows a microservice-based architecture that adheres to Clean and Hexagonal architecture principles, making it scalable, maintainable, and easily extendable. Some of the key technical features of EatStreet include:
+EatStreet is a sophisticated food ordering system developed using the Java Spring Boot Framework. The system follows a microservice-based architecture that adheres to Clean and Hexagonal architecture principles, making it scalable, maintainable, and easily extendable. Some of the key technical features of EatStreet include:
 
 * Implementation of the domain layer using Domain Driven Design (DDD) principles to ensure that the business logic is decoupled from the infrastructure layer.
 * Use of SAGA, Outbox, and CQRS patterns to manage complex workflows in the system. SAGA pattern is used to handle distributed transactions, while Outbox pattern is used to ensure that the database writes are atomic and idempotent. CQRS pattern is used to separate the read and write models, providing a more scalable solution.
