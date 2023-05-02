@@ -10,11 +10,17 @@ EatStreet is a sophisticated food ordering system developed using the Java Sprin
 
 ## Module Dependency Diagram
 ![dependency-module diagram](.//docs/images/dependency-graph.png)
-## Order Service
-![dependency-module diagram](.//docs/images/order-service.png)
-## Payment Service
-![dependency-module diagram](.//docs/images/payment-service.png)
+## Domain Driven Design Diagrams
+### Order Service
+![DDD diagram](.//docs/images/orderServiceDDD.png)
+### Payment Service
+![DDD diagram](.//docs/images/paymentServiceDDD.png)
 
-## Combined System Class Diagram
-![dependency-module diagram](.//docs/images/EatStreet.png)
+## Class Diagrams
+### Order Service
+![Class diagram](.//docs/images/order-service.png)
+### Payment Service
+![Class diagram](.//docs/images/payment-service.png)
+### Combined System Class Diagram
+![UML diagram](.//docs/images/EatStreet.png)
 
