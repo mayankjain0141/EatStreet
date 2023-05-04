@@ -1,5 +1,6 @@
-# EatStreet
+<img src=".//docs/images/Logo.png" style="max-width: 500px; max-height: 500px;" />
 
+# EatStreet
 EatStreet is a sophisticated food ordering system developed using the Java Spring Boot Framework. The system follows a microservice-based architecture that adheres to Clean and Hexagonal architecture principles, making it scalable, maintainable, and easily extendable. Some of the key technical features of EatStreet include:
 
 * Implementation of the domain layer using Domain Driven Design (DDD) principles to ensure that the business logic is decoupled from the infrastructure layer.
