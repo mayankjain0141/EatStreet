@@ -15,6 +15,8 @@ EatStreet is a sophisticated food ordering system developed using the Java Sprin
 ![DDD diagram](.//docs/images/orderServiceDDD.png)
 ### Payment Service
 ![DDD diagram](.//docs/images/paymentServiceDDD.png)
+### Restaurant Service
+![DDD diagram](.//docs/images/restaurantServiceDDD.png)
 
 ## Class Diagrams
 ### Order Service
