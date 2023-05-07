@@ -1,10 +1,10 @@
 package com.food.ordering.system.order.service.dataaccess.restaurant.mapper;
 
+import com.food.ordering.system.dataaccess.resturant.entity.RestaurantEntity;
+import com.food.ordering.system.dataaccess.resturant.exception.RestaurantDataAccessException;
 import com.food.ordering.system.domain.valueobject.Money;
 import com.food.ordering.system.domain.valueobject.ProductId;
 import com.food.ordering.system.domain.valueobject.RestaurantId;
-import com.food.ordering.system.order.service.dataaccess.restaurant.entity.RestaurantEntity;
-import com.food.ordering.system.order.service.dataaccess.restaurant.exception.RestaurantDataException;
 import com.food.ordering.system.order.service.domain.entity.Product;
 import com.food.ordering.system.order.service.domain.entity.Restaurant;
 import org.springframework.stereotype.Component;
@@ -25,7 +25,7 @@ public class RestaurantDataAccessMapper {
     public Restaurant restaurantEntityToRestaurant(List<RestaurantEntity> restaurantEntities) {
         RestaurantEntity restaurantEntity =
                 restaurantEntities.stream().findFirst().orElseThrow(() ->
-                        new RestaurantDataException("Restaurant could not be found."));
+                        new RestaurantDataAccessException("Restaurant could not be found."));
         List<Product> restaurantProducts = restaurantEntities.stream().map(entity ->
                         new Product(new ProductId(entity.getProductId()), entity.getProductName(), new Money(entity.getProductPrice())))
                 .collect(Collectors.toList());
