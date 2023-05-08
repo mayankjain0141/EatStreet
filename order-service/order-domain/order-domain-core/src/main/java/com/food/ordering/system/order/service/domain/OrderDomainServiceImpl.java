@@ -31,7 +31,7 @@ public class OrderDomainServiceImpl implements OrderDomainService {
         order.validateOrder();
         order.initializeOrder();
         log.info("Order with id: {} is initiated", order.getId().getValue());
-        return new OrderCreatedEvent(order, ZonedDateTime.now(ZoneId.of(TIMEZONE)),orderCreatedEventDomainEventPublisher);
+        return new OrderCreatedEvent(order, ZonedDateTime.now(ZoneId.of(TIMEZONE)), orderCreatedEventDomainEventPublisher);
     }
 
     @Override

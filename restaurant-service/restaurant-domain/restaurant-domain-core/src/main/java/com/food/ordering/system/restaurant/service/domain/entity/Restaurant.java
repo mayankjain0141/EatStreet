@@ -16,18 +16,18 @@ public class Restaurant extends AggregateRoot<RestaurantId> {
     private boolean active;
 
     public void validateOrder(List<String> failureMessages) {
-        if (orderDetail.getOrderStatus() != OrderStatus.PAID){
+        if (orderDetail.getOrderStatus() != OrderStatus.PAID) {
             failureMessages.add("Payment is not completed for order: " + orderDetail.getId());
         }
         Money totalAmount = orderDetail.getProducts().stream().map(product -> {
-            if(!product.isAvailable()) {
+            if (!product.isAvailable()) {
                 failureMessages.add("Product with id: " + product.getId().getValue()
                         + " is not available");
             }
             return product.getPrice().multiply(product.getQuantity());
-        }).reduce(Money.ZERO,Money::add);
+        }).reduce(Money.ZERO, Money::add);
 
-        if(!totalAmount.equals(orderDetail.getTotalAmount())){
+        if (!totalAmount.equals(orderDetail.getTotalAmount())) {
             failureMessages.add("Price total is not correct for order: " + orderDetail.getId());
         }
     }
