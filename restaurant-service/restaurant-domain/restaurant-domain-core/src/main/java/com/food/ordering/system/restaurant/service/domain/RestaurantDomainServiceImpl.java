@@ -15,7 +15,7 @@ import java.util.List;
 import static com.food.ordering.system.domain.DomainConstants.TIMEZONE;
 
 @Slf4j
-public class RestaurantDomainServiceImpl implements RestaurantDomainService{
+public class RestaurantDomainServiceImpl implements RestaurantDomainService {
     @Override
     public OrderApprovalEvent validateOrder(Restaurant restaurant,
                                             List<String> failureMessages,
@@ -24,7 +24,7 @@ public class RestaurantDomainServiceImpl implements RestaurantDomainService{
         restaurant.validateOrder(failureMessages);
         log.info("Validating order with id: {}", restaurant.getOrderDetail().getId().getValue());
 
-        if(failureMessages.isEmpty()){
+        if (failureMessages.isEmpty()) {
             restaurant.constructOrderApproval(OrderApprovalStatus.APPROVED);
             log.info("Order is approved for order id: {}", restaurant.getOrderDetail().getId().getValue());
             return new OrderApprovedEvent(restaurant.getOrderApproval(),
@@ -32,7 +32,7 @@ public class RestaurantDomainServiceImpl implements RestaurantDomainService{
                     failureMessages,
                     ZonedDateTime.now(ZoneId.of(TIMEZONE)),
                     orderApprovedEventDomainEventPublisher);
-        }else{
+        } else {
             restaurant.constructOrderApproval(OrderApprovalStatus.REJECTED);
             log.info("Order is rejected for order id: {}", restaurant.getOrderDetail().getId().getValue());
             return new OrderRejectedEvent(restaurant.getOrderApproval(),
