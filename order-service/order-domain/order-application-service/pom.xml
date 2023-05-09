@@ -5,9 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.food.ordering.system</groupId>
-        <artifactId>order-service</artifactId>
+        <artifactId>order-domain</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
     </parent>
 
     <artifactId>order-application-service</artifactId>
@@ -20,11 +19,14 @@
         <dependency>
             <groupId>com.food.ordering.system</groupId>
             <artifactId>order-domain-core</artifactId>
-            <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.food.ordering.system</groupId>
             <artifactId>common-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.food.ordering.system</groupId>
+            <artifactId>saga</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

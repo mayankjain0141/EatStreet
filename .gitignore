@@ -47,4 +47,4 @@ build/
 **/infrastructure/docker-compose/volumes/zookeeper/transactions/**
 
 ### Docs ###
-docs-local
+docs-local/

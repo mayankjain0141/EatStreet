@@ -36,6 +36,12 @@ maintainable, and easily extendable. Some of the key technical features of EatSt
 
 ![DDD diagram](.//docs/images/restaurantServiceDDD.png)
 
+## Microservice Design Patterns Used
+
+### SAGA
+
+![SAGA](.//docs/images/saga.png)
+
 ## Class Diagrams
 
 ### Order Service
@@ -45,6 +51,10 @@ maintainable, and easily extendable. Some of the key technical features of EatSt
 ### Payment Service
 
 ![Class diagram](.//docs/images/payment-service.png)
+
+### Restaurant Service
+
+![Class diagram](.//docs/images/restaurant-service.png)
 
 ### Combined System Class Diagram
 

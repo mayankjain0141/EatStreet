@@ -54,6 +54,7 @@ public class OrderDataMapper {
         return TrackOrderResponse.builder()
                 .orderTrackingId(order.getTrackingId().getValue())
                 .orderStatus(order.getOrderStatus())
+                .failureMessages(order.getFailureMessages())
                 .build();
     }
 
