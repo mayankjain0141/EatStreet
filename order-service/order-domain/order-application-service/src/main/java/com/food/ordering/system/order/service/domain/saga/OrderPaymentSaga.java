@@ -5,7 +5,7 @@ import com.food.ordering.system.order.service.domain.OrderDomainService;
 import com.food.ordering.system.order.service.domain.dto.message.PaymentResponse;
 import com.food.ordering.system.order.service.domain.entity.Order;
 import com.food.ordering.system.order.service.domain.event.OrderPaidEvent;
-import com.food.ordering.system.order.service.domain.ports.output.message.publisher.restaurantapproval.OrderPaidRestaurantRequestMessagePublisher;
+import com.food.ordering.system.order.service.domain.ports.output.message.publisher.payment.PaymentRequestMessagePublisher;
 import com.food.ordering.system.saga.SagaStep;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -17,14 +17,14 @@ public class OrderPaymentSaga implements SagaStep<PaymentResponse, OrderPaidEven
 
     private final OrderDomainService orderDomainService;
     private final OrderSagaHelper orderSagaHelper;
-    private final OrderPaidRestaurantRequestMessagePublisher orderPaidRestaurantRequestMessagePublisher;
+    private final PaymentRequestMessagePublisher paymentRequestMessagePublisher;
 
     public OrderPaymentSaga(OrderDomainService orderDomainService,
                             OrderSagaHelper orderSagaHelper,
-                            OrderPaidRestaurantRequestMessagePublisher orderPaidRestaurantRequestMessagePublisher) {
+                            PaymentRequestMessagePublisher paymentRequestMessagePublisher) {
         this.orderDomainService = orderDomainService;
         this.orderSagaHelper = orderSagaHelper;
-        this.orderPaidRestaurantRequestMessagePublisher = orderPaidRestaurantRequestMessagePublisher;
+        this.paymentRequestMessagePublisher = paymentRequestMessagePublisher;
     }
 
     @Override
