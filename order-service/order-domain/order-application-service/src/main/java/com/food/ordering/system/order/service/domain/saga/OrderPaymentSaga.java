@@ -57,7 +57,7 @@ public class OrderPaymentSaga implements SagaStep<PaymentResponse> {
         );
 
         if (!orderPaymentOutboxMessageResponse.isPresent()) {
-            log.info("An outbox message with saga id: {} is alrady processed!", paymentResponse.getSagaId());
+            log.info("An outbox message with saga id: {} is already processed!", paymentResponse.getSagaId());
             return;
         }
 
@@ -129,7 +129,9 @@ public class OrderPaymentSaga implements SagaStep<PaymentResponse> {
         return orderPaymentOutboxMessage;
     }
 
-    private OrderApprovalOutboxMessage getUpdatedApprovalOutboxMessage(String sagaId, OrderStatus orderStatus, SagaStatus sagaStatus) {
+    private OrderApprovalOutboxMessage getUpdatedApprovalOutboxMessage(String sagaId,
+                                                                       OrderStatus orderStatus,
+                                                                       SagaStatus sagaStatus) {
         Optional<OrderApprovalOutboxMessage> orderApprovalOutboxMessageResponse =
                 approvalOutboxHelper.getApprovalOutboxMessageBySagaIdAndSagaStatus(
                         UUID.fromString(sagaId),
