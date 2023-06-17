@@ -11,12 +11,12 @@ import org.springframework.context.annotation.Bean;
 public class OrderTestConfiguration {
 
     @Bean
-    public PaymentRequestMessagePublisher orderCreatedPaymentRequestMessagePublisher(){
+    public PaymentRequestMessagePublisher orderCreatedPaymentRequestMessagePublisher() {
         return Mockito.mock(PaymentRequestMessagePublisher.class);
     }
 
     @Bean
-    public RestaurantApprovalRequestMessagePublisher orderCancelledPaymentRequestMessagePublisher(){
+    public RestaurantApprovalRequestMessagePublisher orderCancelledPaymentRequestMessagePublisher() {
         return Mockito.mock(RestaurantApprovalRequestMessagePublisher.class);
     }
 
