@@ -33,7 +33,6 @@ public class RestaurantApprovalRequestHelper {
     private final RestaurantApprovalResponseMessagePublisher restaurantApprovalResponseMessagePublisher;
 
 
-
     public RestaurantApprovalRequestHelper(RestaurantDomainService restaurantDomainService,
                                            RestaurantDataMapper restaurantDataMapper,
                                            RestaurantRepository restaurantRepository,
