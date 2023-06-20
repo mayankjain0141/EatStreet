@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.food.ordering.system.domain.DomainConstants.UTC;
+import static com.food.ordering.system.domain.DomainConstants.TIMEZONE;
 import static com.food.ordering.system.saga.order.SagaConstants.ORDER_SAGA_NAME;
 
 @Slf4j
@@ -60,7 +60,7 @@ public class OrderOutboxHelper {
                 .id(UUID.randomUUID())
                 .sagaId(sagaId)
                 .createdAt(orderEventPayload.getCreatedAt())
-                .processedAt(ZonedDateTime.now(ZoneId.of(UTC)))
+                .processedAt(ZonedDateTime.now(ZoneId.of(TIMEZONE)))
                 .type(ORDER_SAGA_NAME)
                 .payload(createPayload(orderEventPayload))
                 .approvalStatus(approvalStatus)

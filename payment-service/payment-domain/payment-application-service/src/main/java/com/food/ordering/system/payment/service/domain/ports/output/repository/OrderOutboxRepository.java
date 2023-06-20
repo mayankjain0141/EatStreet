@@ -17,6 +17,5 @@ public interface OrderOutboxRepository {
                                                                                     UUID sagaId,
                                                                                     PaymentStatus paymentStatus,
                                                                                     OutboxStatus outboxStatus);
-
     void deleteByTypeAndOutboxStatus(String type, OutboxStatus status);
 }
