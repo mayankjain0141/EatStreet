@@ -5,10 +5,7 @@ import com.food.ordering.system.order.service.domain.dto.create.CreateOrderComma
 import com.food.ordering.system.order.service.domain.dto.create.CreateOrderResponse;
 import com.food.ordering.system.order.service.domain.dto.create.OrderAddress;
 import com.food.ordering.system.order.service.domain.dto.track.TrackOrderResponse;
-import com.food.ordering.system.order.service.domain.entity.Order;
-import com.food.ordering.system.order.service.domain.entity.OrderItem;
-import com.food.ordering.system.order.service.domain.entity.Product;
-import com.food.ordering.system.order.service.domain.entity.Restaurant;
+import com.food.ordering.system.order.service.domain.entity.*;
 import com.food.ordering.system.order.service.domain.event.OrderCancelledEvent;
 import com.food.ordering.system.order.service.domain.event.OrderCreatedEvent;
 import com.food.ordering.system.order.service.domain.event.OrderPaidEvent;
@@ -25,7 +22,6 @@ import java.util.stream.Collectors;
 @Component
 public class OrderDataMapper {
 
-    // set only the ID of the product here, rest we'll get from restaurant repository
     public Restaurant createOrderCommandToRestaurant(CreateOrderCommand createOrderCommand) {
         return Restaurant.Builder.builder()
                 .restaurantId(new RestaurantId(createOrderCommand.getRestaurantId()))
@@ -71,22 +67,8 @@ public class OrderDataMapper {
                 .build();
     }
 
-    public OrderApprovalEventPayload orderPaidEventToOrderApprovalEventPayload(OrderPaidEvent orderPaidEvent) {
-        return OrderApprovalEventPayload.builder()
-                .orderId(orderPaidEvent.getOrder().getId().getValue().toString())
-                .restaurantId(orderPaidEvent.getOrder().getRestaurantId().getValue().toString())
-                .price(orderPaidEvent.getOrder().getPrice().getAmount())
-                .products(orderPaidEvent.getOrder().getItems().stream().map(orderItem ->
-                        OrderApprovalEventProduct.builder()
-                                .id(orderItem.getOrderId().getValue().toString())
-                                .quantity(orderItem.getQuantity())
-                                .build()).collect(Collectors.toList()))
-                .createdAt(orderPaidEvent.getCreatedAt())
-                .restaurantOrderStatus(RestaurantOrderStatus.PAID.name())
-                .build();
-    }
-
-    public OrderPaymentEventPayload orderCancelledEventToOrderPaymentEventPayload(OrderCancelledEvent orderCancelledEvent) {
+    public OrderPaymentEventPayload orderCancelledEventToOrderPaymentEventPayload(OrderCancelledEvent
+                                                                                          orderCancelledEvent) {
         return OrderPaymentEventPayload.builder()
                 .customerId(orderCancelledEvent.getOrder().getCustomerId().getValue().toString())
                 .orderId(orderCancelledEvent.getOrder().getId().getValue().toString())
@@ -96,7 +78,23 @@ public class OrderDataMapper {
                 .build();
     }
 
-    private List<OrderItem> orderItemsToOrderItemEntities(List<com.food.ordering.system.order.service.domain.dto.create.OrderItem> orderItems) {
+    public OrderApprovalEventPayload orderPaidEventToOrderApprovalEventPayload(OrderPaidEvent orderPaidEvent) {
+        return OrderApprovalEventPayload.builder()
+                .orderId(orderPaidEvent.getOrder().getId().getValue().toString())
+                .restaurantId(orderPaidEvent.getOrder().getRestaurantId().getValue().toString())
+                .restaurantOrderStatus(RestaurantOrderStatus.PAID.name())
+                .products(orderPaidEvent.getOrder().getItems().stream().map(orderItem ->
+                        OrderApprovalEventProduct.builder()
+                                .id(orderItem.getProduct().getId().getValue().toString())
+                                .quantity(orderItem.getQuantity())
+                                .build()).collect(Collectors.toList()))
+                .price(orderPaidEvent.getOrder().getPrice().getAmount())
+                .createdAt(orderPaidEvent.getCreatedAt())
+                .build();
+    }
+
+    private List<OrderItem> orderItemsToOrderItemEntities(
+            List<com.food.ordering.system.order.service.domain.dto.create.OrderItem> orderItems) {
         return orderItems.stream()
                 .map(orderItem ->
                         OrderItem.Builder.builder()
@@ -104,8 +102,7 @@ public class OrderDataMapper {
                                 .price(new Money(orderItem.getPrice()))
                                 .quantity(orderItem.getQuantity())
                                 .subTotal(new Money(orderItem.getSubTotal()))
-                                .build()
-                ).collect(Collectors.toList());
+                                .build()).collect(Collectors.toList());
     }
 
     private StreetAddress orderAddressToStreetAddress(OrderAddress orderAddress) {
@@ -116,6 +113,4 @@ public class OrderDataMapper {
                 orderAddress.getCity()
         );
     }
-
-
 }
