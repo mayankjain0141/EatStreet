@@ -82,11 +82,11 @@ order-service
 
 ### Combined SAGA + Outbox
 
-![SAGA+OUTBOX](.//docs/images/saga+outbox.png)
+![SAGA+OUTBOX](.//docs/images/Saga+Outbox.png)
 
 ### CQRS
 
-![CQRS](.//docs/images/cqrs.png)
+![CQRS](.//docs/images/CQRS.png)
 
 ### Outbox Workflows
 1. Happy Flow
